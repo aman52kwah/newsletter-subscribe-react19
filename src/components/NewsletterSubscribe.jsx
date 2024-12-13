@@ -8,24 +8,22 @@ const fakeSendEmail = async () => {
 const NewsletterSubscribe = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [result, setResult] = useState(null);
   const [isPending, setIsPending] = useState(false);
   const [result, submitAction, isPending] = useActionState(
     async (previousState, formData) => {
       if (!name || !email) {
-        setResult({
+        return {
           type: "error",
           message: `Please fill in your name and email.`,
-        });
-        return;
+        };
       }
 
       setIsPending(true);
       fakeSendEmail().then(() => {
-        setResult({
+        return {
           type: "success",
           message: `You have succesfully subscribed!`,
-        });
+        };
         setName("");
         setEmail("");
         setIsPending(false);
