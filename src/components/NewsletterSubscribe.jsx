@@ -1,4 +1,3 @@
-import { useState } from "react";
 import "./newsletter.css";
 
 const fakeSendEmail = async () => {
@@ -6,10 +5,10 @@ const fakeSendEmail = async () => {
 };
 
 const NewsletterSubscribe = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
   const [result, submitAction, isPending] = useActionState(
     async (previousState, formData) => {
+      const name = formData.get("name");
+      const email = formData.get("email");
       if (!name || !email) {
         return {
           type: "error",
@@ -22,8 +21,6 @@ const NewsletterSubscribe = () => {
           type: "success",
           message: `You have succesfully subscribed!`,
         };
-        setName("");
-        setEmail("");
       });
     },
     null
@@ -37,21 +34,11 @@ const NewsletterSubscribe = () => {
         <h3>Join the newsletter</h3>
         <div>
           <label htmlFor="name">Name</label>
-          <input
-            type="text"
-            name="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
+          <input type="text" name="name" />
         </div>
         <div>
           <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            name="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+          <input type="email" name="email" />
         </div>
         <div>
           <button type="submit">Subscribe</button>
