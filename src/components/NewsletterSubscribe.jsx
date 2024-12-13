@@ -10,34 +10,35 @@ const NewsletterSubscribe = () => {
   const [email, setEmail] = useState("");
   const [result, setResult] = useState(null);
   const [isPending, setIsPending] = useState(false);
+  const [result, submitAction, isPending] = useActionState(
+    async (previousState, formData) => {
+      if (!name || !email) {
+        setResult({
+          type: "error",
+          message: `Please fill in your name and email.`,
+        });
+        return;
+      }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (!name || !email) {
-      setResult({
-        type: "error",
-        message: `Please fill in your name and email.`,
+      setIsPending(true);
+      fakeSendEmail().then(() => {
+        setResult({
+          type: "success",
+          message: `You have succesfully subscribed!`,
+        });
+        setName("");
+        setEmail("");
+        setIsPending(false);
       });
-      return;
-    }
+    },
+    null
+  );
 
-    setIsPending(true);
-    fakeSendEmail().then(() => {
-      setResult({
-        type: "success",
-        message: `You have succesfully subscribed!`,
-      });
-      setName("");
-      setEmail("");
-      setIsPending(false);
-    });
-  };
   return (
     <>
       {result && <p className={`message ${result.type}`}>{result.message}</p>}
       {isPending && <p className="message loading">Loading ...</p>}
-      <form onSubmit={handleSubmit}>
+      <form action={submitAction}>
         <h3>Join the newsletter</h3>
         <div>
           <label htmlFor="name">Name</label>
