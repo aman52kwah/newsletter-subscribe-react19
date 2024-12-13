@@ -8,7 +8,6 @@ const fakeSendEmail = async () => {
 const NewsletterSubscribe = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [isPending, setIsPending] = useState(false);
   const [result, submitAction, isPending] = useActionState(
     async (previousState, formData) => {
       if (!name || !email) {
@@ -18,7 +17,6 @@ const NewsletterSubscribe = () => {
         };
       }
 
-      setIsPending(true);
       fakeSendEmail().then(() => {
         return {
           type: "success",
@@ -26,7 +24,6 @@ const NewsletterSubscribe = () => {
         };
         setName("");
         setEmail("");
-        setIsPending(false);
       });
     },
     null
