@@ -1,5 +1,7 @@
+import NewsletterSubscribe from "./components/NewsletterSubscribe";
+
 function App() {
-  return <h1>Hello world!</h1>;
+  return <NewsletterSubscribe />;
 }
 
 export default App;
