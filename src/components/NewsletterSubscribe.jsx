@@ -1,3 +1,4 @@
+import { useActionState } from "react";
 import "./newsletter.css";
 
 const fakeSendEmail = async () => {
@@ -16,12 +17,11 @@ const NewsletterSubscribe = () => {
         };
       }
 
-      fakeSendEmail().then(() => {
-        return {
-          type: "success",
-          message: `You have succesfully subscribed!`,
-        };
-      });
+      await fakeSendEmail();
+      return {
+        type: "success",
+        message: `You have succesfully subscribed!`,
+      };
     },
     null
   );
