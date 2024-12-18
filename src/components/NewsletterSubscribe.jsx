@@ -34,11 +34,11 @@ const NewsletterSubscribe = () => {
         <h3>Join the newsletter</h3>
         <div>
           <label htmlFor="name">Name</label>
-          <input type="text" name="name" />
+          <input type="text" name="name" id="name" />
         </div>
         <div>
           <label htmlFor="email">Email</label>
-          <input type="email" name="email" />
+          <input type="email" name="email" id="email" />
         </div>
         <div>
           <button type="submit">Subscribe</button>
