@@ -1,39 +1,33 @@
 form {
-    --primary-color: chocolate;
-    --secondary-color: bisque;
-    padding: 10px;
-    background-color: var(--secondary-color);
-    border: 1px solid var(--primary-color);
-    text-align: center;
-    max-width: 300px;
-    margin: auto;
+  --primary-color:chocolate;
+  --secondary-color:bisque;
+  padding: 10px;
+  background-color: var(--secondary-color);
+  border:1px solid var(--primary-color);
+  text-align: center;
+  max-width: 300px;
+  margin:auto;
+}
+formh3 {
+  color: var(--primary-color);
+}
+form label{
+  margin-right: 10px;
+}
+form > div{
+  margin: 5px 0;
+}
+form button [type="submit"] {
+  margin-top: 10px;
+  padding: 5px 10px;
+}
+p.message {
+  text-align: center;
+  padding: 10px;
+}
+p.error{
+  color:red;
+  p.sucess{
+    color:green
   }
-  
-  form h3 {
-    color: var(--primary-color);
-  }
-  
-  form label {
-    margin-right: 10px;
-  }
-  
-  form > div {
-    margin: 5px 0;
-  }
-  
-  form button[type="submit"] {
-    margin-top: 10px;
-    padding: 5px 10px;
-  }
-  
-  p.message {
-    text-align: center;
-    padding: 10px;
-  }
-  
-  p.error {
-    color: red;
-  }
-  p.success {
-    color: green;
-  }
+}

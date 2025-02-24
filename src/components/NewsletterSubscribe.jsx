@@ -1,53 +1,89 @@
-import { useActionState, useId } from "react";
+import {useState} from "react";
 import "./newsletter.css";
 
-const fakeSendEmail = async () => {
-  return new Promise((resolve) => setTimeout(resolve, 1000));
+const fakeSendEmail = async () =>{
+return new Promise((resolve)=> setTimeout(resolve,1000));
 };
 
 const NewsletterSubscribe = () => {
-  const [result, submitAction, isPending] = useActionState(
-    async (previousState, formData) => {
-      const name = formData.get("name");
-      const email = formData.get("email");
-      if (!name || !email) {
-        return {
-          type: "error",
-          message: `Please fill in your name and email.`,
-        };
-      }
+  const [name,setName]=useState("");
+  const [email,setEmail]=useState("");
+  const [result,setResult]=useState(null);
+  const [isPending,setIsPending]=useState(false);
 
-      await fakeSendEmail();
-      return {
-        type: "success",
-        message: `You have succesfully subscribed!`,
-      };
-    },
-    null
-  );
 
-  const emailInputId = useId();
-  const nameInputId = useId();
-  return (
-    <>
-      {result && <p className={`message ${result.type}`}>{result.message}</p>}
-      {isPending && <p className="message loading">Loading ...</p>}
-      <form action={submitAction}>
-        <h3>Join the newsletter</h3>
-        <div>
-          <label htmlFor={nameInputId}>Name</label>
-          <input type="text" name="name" id={nameInputId} />
-        </div>
-        <div>
-          <label htmlFor={emailInputId}>Email</label>
-          <input type="email" name="email" id={emailInputId} />
-        </div>
-        <div>
-          <button type="submit">Subscribe</button>
-        </div>
-      </form>
-    </>
-  );
+ 
+  // eslint-disable-next-line no-unused-vars
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+  if (!name || !email) {
+    setResult({
+    type:"error",
+    message:`please fill in your fullname and email address.`,
+    });
+    return;
+  }
+    setIsPending(true);
+    fakeSendEmail().then(()=>{
+      setResult({
+        type:"success",
+        message:`You have sucecessfully subscribed o my newsletter`
+      });
+      setName("");
+      setEmail("");
+      setIsPending(false);
+    });
+;
+return (
+  <>
+  {result && <p className={`message ${result.type}`}>{result.message}</p>}
+  {isPending && <p className="message loading">Loading..</p>}
+  <form onSubmit={handleSubmit}>
+    <h3>Join the newsletter</h3>
+    <div>
+      <label htmlFor="name">Name</label>
+      <input 
+      type="text"
+      name="name"
+      id="name"
+      value={name}
+      onChange={(e) => setName(e.target.value)}
+      />
+    </div>
+    <div>
+      <label htmlFor="email">Email</label>
+      
+      <input 
+      type="email"
+      name="email"
+      id="email"
+      value={email}
+      onChange={(e) => setEmail(e.target.value)}
+  />
+    </div>
+    <div>
+      <button type="submit">Subscribe</button>
+    </div>
+
+  </form>
+  
+  
+  </>
+)
+}
+
+
 };
+
+
+
+
+
+
+
+
+
+
 
 export default NewsletterSubscribe;
