@@ -13,14 +13,14 @@ const NewsletterSubscribe = () => {
 
 
  
-  // eslint-disable-next-line no-unused-vars
+   
   const handleSubmit = (e) => {
     e.preventDefault();
 
   if (!name || !email) {
     setResult({
     type:"error",
-    message:`please fill in your fullname and email address.`,
+    message:"please fill in your fullname and email address.",
     });
     return;
   }
@@ -28,18 +28,21 @@ const NewsletterSubscribe = () => {
     fakeSendEmail().then(()=>{
       setResult({
         type:"success",
-        message:`You have sucecessfully subscribed o my newsletter`
+        message:"You have successfully subscribed to my newsletter"
       });
       setName("");
       setEmail("");
       setIsPending(false);
     });
-;
-return (
+  };
+
+      return (
   <>
   {result && <p className={`message ${result.type}`}>{result.message}</p>}
   {isPending && <p className="message loading">Loading..</p>}
-  <form onSubmit={handleSubmit}>
+
+       {/* form inputs */}
+       <form onSubmit={handleSubmit}>
     <h3>Join the newsletter</h3>
     <div>
       <label htmlFor="name">Name</label>
@@ -51,6 +54,7 @@ return (
       onChange={(e) => setName(e.target.value)}
       />
     </div>
+
     <div>
       <label htmlFor="email">Email</label>
       
@@ -62,6 +66,7 @@ return (
       onChange={(e) => setEmail(e.target.value)}
   />
     </div>
+
     <div>
       <button type="submit">Subscribe</button>
     </div>
@@ -71,19 +76,6 @@ return (
   
   </>
 )
-}
-
-
 };
-
-
-
-
-
-
-
-
-
-
 
 export default NewsletterSubscribe;

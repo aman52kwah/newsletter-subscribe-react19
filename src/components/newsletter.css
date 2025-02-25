@@ -27,7 +27,7 @@ p.message {
 }
 p.error{
   color:red;
-  p.sucess{
-    color:green
-  }
+}
+p.success{
+  color:green
 }
